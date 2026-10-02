@@ -32,7 +32,7 @@ class AppBottomNavigationBar extends StatelessWidget {
         selectedFontSize: 11,
         unselectedItemColor: colors.navInactive,
         unselectedFontSize: 11,
-        iconSize: 22,
+        iconSize: dimens.iconMd,
         backgroundColor: colors.surfaceRaised,
         type: BottomNavigationBarType.fixed,
         items: const [
