@@ -1,3 +1,4 @@
+import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,11 @@ class WishScreen extends StatelessWidget {
           ),
           Expanded(
             child: symbols.isEmpty
-                ? const Center(child: Text('관심 종목이 없습니다.'))
+                ? const EmptyState(
+                    icon: Icons.star_outline,
+                    title: '관심 종목이 없습니다',
+                    subtitle: '검색 탭에서 종목을 찾아\n별 아이콘을 눌러 추가해 주세요.',
+                  )
                 : ListView.builder(
                     itemCount: symbols.length,
                     itemBuilder: (context, index) {
