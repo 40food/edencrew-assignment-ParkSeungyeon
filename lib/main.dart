@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'theme/theme.dart';
+import 'core/theme/theme.dart';
+import 'features/home/presentation/home_screen.dart';
+import 'common/data/storage/wish_storage.dart';
+import 'features/wish/provider/wish_provider.dart';
+import 'features/search/provider/search_provider.dart';
+import 'common/data/repository/search_repository.dart';
 
 void main() {
-  runApp(const EdencrewAssignmentApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => WishProvider(WishStorage())..load(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SearchProvider(SearchRepository()),
+        ),
+      ],
+      child: const EdencrewAssignmentApp(),
+    ),
+  );
 }
 
 class EdencrewAssignmentApp extends StatelessWidget {
@@ -14,7 +32,7 @@ class EdencrewAssignmentApp extends StatelessWidget {
     return MaterialApp(
       title: '이든크루 평가 과제',
       theme: AppTheme.dark,
-      home: const StartHereScreen(),
+      home: const HomeScreen(),
     );
   }
 }

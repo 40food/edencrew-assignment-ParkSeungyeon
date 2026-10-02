@@ -1,0 +1,32 @@
+import 'package:flutter/foundation.dart';
+
+import '../../../common/data/storage/wish_storage.dart';
+
+class WishProvider extends ChangeNotifier {
+  final WishStorage _storage;
+
+  WishProvider(this._storage);
+
+  List<String> _symbols = [];
+
+  List<String> get symbols => List.unmodifiable(_symbols);
+
+  Future<void> load() async {
+    _symbols = await _storage.getSymbols();
+    notifyListeners();
+  }
+
+  Future<void> add(String symbol) async {
+    if (_symbols.contains(symbol)) return;
+
+    _symbols = [..._symbols, symbol];
+    await _storage.saveSymbols(_symbols);
+    notifyListeners();
+  }
+
+  Future<void> remove(String symbol) async {
+    _symbols = _symbols.where((item) => item != symbol).toList();
+    await _storage.saveSymbols(_symbols);
+    notifyListeners();
+  }
+}
