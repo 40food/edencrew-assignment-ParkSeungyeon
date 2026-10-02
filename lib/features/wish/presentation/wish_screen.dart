@@ -11,13 +11,14 @@ class WishScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final symbols = context.watch<WishProvider>().symbols;
+    final AppDimens dimens = context.dimens;
 
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(context.dimens.space4),
+            padding: EdgeInsets.all(dimens.space4),
             child: const AppLabel('관심'),
           ),
           Expanded(

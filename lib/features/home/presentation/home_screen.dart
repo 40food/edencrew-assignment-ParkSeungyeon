@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../search/presentation/search_screen.dart';
 import '../../wish/presentation/wish_screen.dart';
+import '../../../common/widgets/app_bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,18 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      body: SafeArea(child: _screens[_currentIndex]),
+      bottomNavigationBar: AppBottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.star_outline), label: '관심'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '검색'),
-        ],
       ),
     );
   }
