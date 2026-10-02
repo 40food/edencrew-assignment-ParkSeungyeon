@@ -68,6 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   return SearchItem(
                     stock: stock,
                     isWish: isWish,
+                    query: _controller.text,
                     onTap: () {
                       if (isWish) {
                         wishProvider.remove(stock.code);
