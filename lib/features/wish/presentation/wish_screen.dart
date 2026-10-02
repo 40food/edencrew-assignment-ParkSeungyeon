@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/theme/theme.dart';
+import '../../../theme/theme.dart';
 import '../../../common/widgets/label.dart';
 import '../provider/wish_provider.dart';
 

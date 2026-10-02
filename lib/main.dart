@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'core/theme/theme.dart';
+import 'theme/theme.dart';
 import 'features/home/presentation/home_screen.dart';
 import 'common/data/storage/wish_storage.dart';
 import 'features/wish/provider/wish_provider.dart';
