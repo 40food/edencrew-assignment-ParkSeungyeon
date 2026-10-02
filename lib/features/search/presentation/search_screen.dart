@@ -1,8 +1,9 @@
+import 'package:edencrew_assignment_starter/features/search/provider/search_provider.dart';
+import 'package:edencrew_assignment_starter/features/wish/provider/wish_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../wish/provider/wish_provider.dart';
-import '../provider/search_provider.dart';
+import 'search_item.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -16,7 +17,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<SearchProvider>();
+    final searchProvider = context.watch<SearchProvider>();
+    final wishProvider = context.watch<WishProvider>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('종목 검색')),
@@ -35,26 +37,25 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             const SizedBox(height: 16),
-
-            if (provider.isLoading) const CircularProgressIndicator(),
-
+            if (searchProvider.isLoading) const CircularProgressIndicator(),
             Expanded(
               child: ListView.builder(
-                itemCount: provider.results.length,
+                itemCount: searchProvider.results.length,
                 itemBuilder: (context, index) {
-                  final stock = provider.results[index];
-
-                  return ListTile(
-                    title: Text(stock.name),
-                    subtitle: Text('${stock.code} · ${stock.typeName}'),
-                    trailing: TextButton(
-                      onPressed: () {
-                        context.read<WishProvider>().add(
-                          'domestic:${stock.code}',
-                        );
-                      },
-                      child: const Text('추가'),
-                    ),
+                  final stock = searchProvider.results[index];
+                  final isWish = wishProvider.symbols.contains(
+                    'domestic:${stock.code}',
+                  );
+                  return SearchItem(
+                    stock: stock,
+                    isWish: isWish,
+                    onTap: () {
+                      if (isWish) {
+                        wishProvider.remove(stock.code);
+                      } else {
+                        wishProvider.add(stock.code);
+                      }
+                    },
                   );
                 },
               ),

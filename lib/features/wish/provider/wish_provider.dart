@@ -16,15 +16,16 @@ class WishProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> add(String symbol) async {
+  Future<void> add(String code) async {
+    final symbol = 'domestic:$code';
     if (_symbols.contains(symbol)) return;
-
     _symbols = [..._symbols, symbol];
     await _storage.saveSymbols(_symbols);
     notifyListeners();
   }
 
-  Future<void> remove(String symbol) async {
+  Future<void> remove(String code) async {
+    final symbol = 'domestic:$code';
     _symbols = _symbols.where((item) => item != symbol).toList();
     await _storage.saveSymbols(_symbols);
     notifyListeners();
