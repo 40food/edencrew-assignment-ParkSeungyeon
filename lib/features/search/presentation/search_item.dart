@@ -50,6 +50,9 @@ class SearchItem extends StatelessWidget {
           defaultColor: colors.textSecondary,
         ),
         trailing: IconButton(
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+          iconSize: context.dimens.iconMd,
           onPressed: onTap,
           icon: Icon(
             isWish ? Icons.star : Icons.star_outline,
