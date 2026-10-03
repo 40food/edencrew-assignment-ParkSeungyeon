@@ -5,8 +5,8 @@ import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WishScreen extends StatelessWidget {
-  const WishScreen({super.key});
+class WatchScreen extends StatelessWidget {
+  const WatchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

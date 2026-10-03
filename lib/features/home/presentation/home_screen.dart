@@ -1,6 +1,6 @@
 import 'package:edencrew_assignment_starter/common/widgets/app_bottom_navigation_bar.dart';
 import 'package:edencrew_assignment_starter/features/search/presentation/search_screen.dart';
-import 'package:edencrew_assignment_starter/features/wish/presentation/wish_screen.dart';
+import 'package:edencrew_assignment_starter/features/watch/presentation/watch_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [WishScreen(), SearchScreen()];
+  final List<Widget> _screens = const [WatchScreen(), SearchScreen()];
 
   @override
   Widget build(BuildContext context) {
