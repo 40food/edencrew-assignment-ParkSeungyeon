@@ -1,13 +1,12 @@
 import 'package:edencrew_assignment_starter/common/widgets/app_toast.dart';
 import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
-import 'package:edencrew_assignment_starter/features/search/provider/search_provider.dart';
+import 'package:edencrew_assignment_starter/features/search/data/provider/search_provider.dart';
+import 'package:edencrew_assignment_starter/features/search/presentation/search_item.dart';
+import 'package:edencrew_assignment_starter/features/search/presentation/search_text_field.dart';
 import 'package:edencrew_assignment_starter/features/wish/provider/wish_provider.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'search_item.dart';
-import 'search_text_field.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

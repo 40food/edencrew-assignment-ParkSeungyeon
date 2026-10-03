@@ -1,4 +1,4 @@
-import 'package:edencrew_assignment_starter/common/data/dto/search_dto.dart';
+import 'package:edencrew_assignment_starter/common/data/model/stock.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class SearchItem extends StatelessWidget {
     required this.query,
   });
 
-  final SearchDto stock;
+  final Stock stock;
   final bool isWish;
   final VoidCallback? onTap;
   final String query;
@@ -43,7 +43,7 @@ class SearchItem extends StatelessWidget {
           defaultColor: colors.textPrimary,
         ),
         subtitle: _HighlightText(
-          text: '${stock.code} · ${stock.typeName}',
+          text: '${stock.code} · ${stock.category}',
           query: query,
           highlightColor: colors.accentDefault,
           fontSize: 11,

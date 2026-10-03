@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:edencrew_assignment_starter/common/data/model/stock.dart';
+import 'package:edencrew_assignment_starter/features/search/data/dto/search_dto.dart';
 import 'package:http/http.dart' as http;
 
-import '../dto/search_dto.dart';
-
 class SearchRepository {
-  Future<List<SearchDto>> searchStocks(String query) async {
+  Future<List<Stock>> searchStocks(String query) async {
     if (query.isEmpty) return [];
 
     final uri = Uri.https('ac.stock.naver.com', '/ac', {
@@ -28,6 +28,10 @@ class SearchRepository {
               stock.nationCode == 'KOR' &&
               stock.category == 'stock' &&
               RegExp(r'^\d{6}$').hasMatch(stock.code),
+        )
+        .map(
+          (dto) =>
+              Stock(code: dto.code, name: dto.name, category: dto.typeName),
         )
         .toList();
 

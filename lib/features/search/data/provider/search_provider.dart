@@ -1,7 +1,6 @@
+import 'package:edencrew_assignment_starter/common/data/model/stock.dart';
+import 'package:edencrew_assignment_starter/features/search/data/repository/search_repository.dart';
 import 'package:flutter/foundation.dart';
-
-import '../../../common/data/dto/search_dto.dart';
-import '../../../common/data/repository/search_repository.dart';
 
 enum SearchStatus { initial, loading, success, empty, error }
 
@@ -10,11 +9,11 @@ class SearchProvider extends ChangeNotifier {
 
   SearchProvider(this._repository);
 
-  List<SearchDto> _results = [];
+  List<Stock> _results = [];
   SearchStatus _status = SearchStatus.initial;
   String? _error;
 
-  List<SearchDto> get results => List.unmodifiable(_results);
+  List<Stock> get results => List.unmodifiable(_results);
   SearchStatus get status => _status;
   String? get error => _error;
 
