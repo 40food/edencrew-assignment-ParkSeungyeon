@@ -74,7 +74,7 @@ class WatchItem extends StatelessWidget {
                           : isDown
                           ? colors.priceDownText
                           : colors.priceFlatText,
-                      fontWeight: AppTypography.medium,
+                      fontWeight: AppTypography.regular,
                       fontSize: 11,
                     ),
                   ),
