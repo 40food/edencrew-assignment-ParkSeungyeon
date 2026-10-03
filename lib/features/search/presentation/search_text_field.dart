@@ -1,4 +1,4 @@
-import 'package:edencrew_assignment_starter/features/search/data/provider/search_provider.dart';
+import 'package:edencrew_assignment_starter/features/search/presentation/provider/search_provider.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

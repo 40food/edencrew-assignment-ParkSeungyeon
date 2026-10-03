@@ -1,6 +1,6 @@
 import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
 import 'package:edencrew_assignment_starter/common/widgets/label.dart';
-import 'package:edencrew_assignment_starter/features/wish/provider/wish_provider.dart';
+import 'package:edencrew_assignment_starter/features/wish/presentation/provider/wish_provider.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

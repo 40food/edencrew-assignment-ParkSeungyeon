@@ -1,9 +1,10 @@
 import 'package:edencrew_assignment_starter/common/widgets/app_toast.dart';
 import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
-import 'package:edencrew_assignment_starter/features/search/data/provider/search_provider.dart';
+import 'package:edencrew_assignment_starter/features/search/data/repository/search_repository.dart';
+import 'package:edencrew_assignment_starter/features/search/presentation/provider/search_provider.dart';
 import 'package:edencrew_assignment_starter/features/search/presentation/search_item.dart';
 import 'package:edencrew_assignment_starter/features/search/presentation/search_text_field.dart';
-import 'package:edencrew_assignment_starter/features/wish/provider/wish_provider.dart';
+import 'package:edencrew_assignment_starter/features/wish/presentation/provider/wish_provider.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,26 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => SearchProvider(SearchRepository()),
+      child: _SearchView(controller: _controller),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+class _SearchView extends StatelessWidget {
+  const _SearchView({required this.controller});
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
               top: dimens.space2,
               bottom: dimens.space3,
             ),
-            child: SearchTextField(controller: _controller),
+            child: SearchTextField(controller: controller),
           ),
           Expanded(
             child: switch (searchProvider.status) {
@@ -47,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
               SearchStatus.empty => EmptyState(
                 icon: Icons.search_off,
                 title: '검색 결과가 없습니다',
-                subtitle: '\'${_controller.text}\'와\n일치하는 검색 결과를 찾지 못했습니다.',
+                subtitle: '\'${controller.text}\'와\n일치하는 검색 결과를 찾지 못했습니다.',
               ),
               SearchStatus.error => const EmptyState(
                 icon: Icons.error,
@@ -69,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   return SearchItem(
                     stock: stock,
                     isWish: isWish,
-                    query: _controller.text,
+                    query: controller.text,
                     onTap: () {
                       final message = isWish ? '관심이 해제되었습니다' : '관심이 등록되었습니다';
 
