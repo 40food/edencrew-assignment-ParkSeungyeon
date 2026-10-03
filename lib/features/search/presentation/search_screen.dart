@@ -1,3 +1,4 @@
+import 'package:edencrew_assignment_starter/common/data/api/stock_api.dart';
 import 'package:edencrew_assignment_starter/common/widgets/app_toast.dart';
 import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
 import 'package:edencrew_assignment_starter/features/search/data/repository/search_repository.dart';
@@ -22,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SearchProvider(SearchRepository()),
+      create: (_) => SearchProvider(SearchRepository(StockApi())),
       child: _SearchView(controller: _controller),
     );
   }
