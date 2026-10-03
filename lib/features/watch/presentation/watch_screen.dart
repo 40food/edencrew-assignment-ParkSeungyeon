@@ -6,6 +6,7 @@ import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
 import 'package:edencrew_assignment_starter/features/watch/data/repository/watch_repository.dart';
 import 'package:edencrew_assignment_starter/features/watch/presentation/provider/watch_provider.dart';
 import 'package:edencrew_assignment_starter/features/watch/presentation/watch_item.dart';
+import 'package:edencrew_assignment_starter/features/watch/presentation/watch_sort_button.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ class _WatchView extends StatelessWidget {
     final watchProvider = context.watch<WatchProvider>();
     final wishProvider = context.watch<WishProvider>();
     final AppDimens dimens = context.dimens;
+    final AppColors colors = context.colors;
 
     final symbols = wishProvider.symbols;
 
@@ -42,7 +44,32 @@ class _WatchView extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.all(dimens.space4),
-            child: const AppLabel('관심'),
+            child: Row(
+              children: [
+                const AppLabel('관심'),
+                const Spacer(),
+
+                SizedBox(
+                  height: dimens.iconMd,
+                  child: WatchSortButton(sort: watchProvider.sort),
+                ),
+
+                SizedBox(width: dimens.space3),
+
+                SizedBox(
+                  width: dimens.iconMd,
+                  height: dimens.iconMd,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      context.read<WatchProvider>().refresh();
+                    },
+                    icon: const Icon(Icons.refresh),
+                    color: colors.textSecondary,
+                  ),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: symbols.isEmpty

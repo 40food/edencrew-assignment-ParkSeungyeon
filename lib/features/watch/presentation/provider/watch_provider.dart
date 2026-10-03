@@ -5,6 +5,21 @@ import 'package:flutter/foundation.dart';
 
 enum WatchStatus { initial, loading, success, empty, error }
 
+enum WatchSort { currentPrice, changeRate, name }
+
+extension WatchSortLabel on WatchSort {
+  String get label {
+    switch (this) {
+      case WatchSort.currentPrice:
+        return '현재가순';
+      case WatchSort.changeRate:
+        return '등락률순';
+      case WatchSort.name:
+        return '가나다순';
+    }
+  }
+}
+
 class WatchProvider extends ChangeNotifier {
   final WatchRepository _repository;
   final WishProvider _wishProvider;
@@ -44,6 +59,7 @@ class WatchProvider extends ChangeNotifier {
           _stocks = updated;
         }
 
+        _sortStocks();
         notifyListeners();
       }
 
@@ -55,6 +71,29 @@ class WatchProvider extends ChangeNotifier {
       _error = '관심 종목을 불러오지 못했습니다.';
       notifyListeners();
     }
+  }
+
+  WatchSort _sort = WatchSort.name;
+  WatchSort get sort => _sort;
+  void setSort(WatchSort sort) {
+    _sort = sort;
+    _sortStocks();
+    notifyListeners();
+  }
+
+  void _sortStocks() {
+    _stocks.sort((a, b) {
+      switch (_sort) {
+        case WatchSort.currentPrice:
+          return (b.currentPrice ?? 0).compareTo(a.currentPrice ?? 0);
+
+        case WatchSort.changeRate:
+          return (b.changeRate ?? 0).compareTo(a.changeRate ?? 0);
+
+        case WatchSort.name:
+          return a.stock.name.compareTo(b.stock.name);
+      }
+    });
   }
 
   @override
