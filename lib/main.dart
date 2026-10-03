@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'theme/theme.dart';
 import 'features/home/presentation/home_screen.dart';
 import 'common/data/storage/wish_storage.dart';
-import 'features/wish/presentation/provider/wish_provider.dart';
+import 'common/data/provider/wish_provider.dart';
 
 void main() {
   runApp(

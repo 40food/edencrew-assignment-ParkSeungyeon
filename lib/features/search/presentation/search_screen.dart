@@ -4,7 +4,7 @@ import 'package:edencrew_assignment_starter/features/search/data/repository/sear
 import 'package:edencrew_assignment_starter/features/search/presentation/provider/search_provider.dart';
 import 'package:edencrew_assignment_starter/features/search/presentation/search_item.dart';
 import 'package:edencrew_assignment_starter/features/search/presentation/search_text_field.dart';
-import 'package:edencrew_assignment_starter/features/wish/presentation/provider/wish_provider.dart';
+import 'package:edencrew_assignment_starter/common/data/provider/wish_provider.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
