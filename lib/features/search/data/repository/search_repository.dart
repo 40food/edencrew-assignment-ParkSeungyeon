@@ -30,8 +30,7 @@ class SearchRepository {
               RegExp(r'^\d{6}$').hasMatch(stock.code),
         )
         .map(
-          (dto) =>
-              Stock(code: dto.code, name: dto.name, category: dto.typeName),
+          (dto) => Stock(code: dto.code, name: dto.name, market: dto.typeName),
         )
         .toList();
 

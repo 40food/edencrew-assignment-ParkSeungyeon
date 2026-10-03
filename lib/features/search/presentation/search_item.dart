@@ -43,7 +43,7 @@ class SearchItem extends StatelessWidget {
           defaultColor: colors.textPrimary,
         ),
         subtitle: _HighlightText(
-          text: '${stock.code} · ${stock.category}',
+          text: '${stock.code} · ${stock.market}',
           query: query,
           highlightColor: colors.accentDefault,
           fontSize: 11,
