@@ -1,7 +1,7 @@
+import 'package:edencrew_assignment_starter/common/widgets/app_bottom_navigation_bar.dart';
+import 'package:edencrew_assignment_starter/features/search/presentation/search_screen.dart';
+import 'package:edencrew_assignment_starter/features/wish/presentation/wish_screen.dart';
 import 'package:flutter/material.dart';
-import '../../search/presentation/search_screen.dart';
-import '../../wish/presentation/wish_screen.dart';
-import '../../../common/widgets/app_bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

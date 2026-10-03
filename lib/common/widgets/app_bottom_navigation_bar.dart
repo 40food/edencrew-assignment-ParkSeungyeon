@@ -1,5 +1,5 @@
+import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
-import '../../theme/theme.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
   const AppBottomNavigationBar({

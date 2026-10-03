@@ -5,8 +5,8 @@ import 'theme/theme.dart';
 import 'features/home/presentation/home_screen.dart';
 import 'common/data/storage/wish_storage.dart';
 import 'features/wish/provider/wish_provider.dart';
-import 'features/search/provider/search_provider.dart';
-import 'common/data/repository/search_repository.dart';
+import 'features/search/data/provider/search_provider.dart';
+import 'features/search/data/repository/search_repository.dart';
 
 void main() {
   runApp(

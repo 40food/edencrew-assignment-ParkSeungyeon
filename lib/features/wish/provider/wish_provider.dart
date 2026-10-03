@@ -1,6 +1,5 @@
+import 'package:edencrew_assignment_starter/common/data/storage/wish_storage.dart';
 import 'package:flutter/foundation.dart';
-
-import '../../../common/data/storage/wish_storage.dart';
 
 class WishProvider extends ChangeNotifier {
   final WishStorage _storage;
