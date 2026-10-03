@@ -27,7 +27,7 @@ class StockApi {
         .toList();
   }
 
-  Future<List<RealtimeDto>> getRealtimeStocks(List<String> codes) async {
+  Stream<RealtimeDto> getRealtimeStocks(List<String> codes) async* {
     final uri = Uri.https('polling.finance.naver.com', '/api/realtime', {
       'query': 'SERVICE_ITEM:${codes.join(',')}',
     });
@@ -43,10 +43,13 @@ class StockApi {
     final result = json['result'] as Map<String, dynamic>;
     final areas = result['areas'] as List;
 
-    return areas
-        .expand((area) => (area['datas'] as List))
-        .map((data) => RealtimeDto.fromJson(data as Map<String, dynamic>))
-        .toList();
+    for (final area in areas) {
+      final datas = area['datas'] as List;
+
+      for (final data in datas) {
+        yield RealtimeDto.fromJson(data as Map<String, dynamic>);
+      }
+    }
   }
 
   Future<MetadataDto> getStockMetadata(String code) async {
