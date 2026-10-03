@@ -1,3 +1,4 @@
+import 'package:edencrew_assignment_starter/common/widgets/app_toast.dart';
 import 'package:edencrew_assignment_starter/common/widgets/empty_state.dart';
 import 'package:edencrew_assignment_starter/features/search/provider/search_provider.dart';
 import 'package:edencrew_assignment_starter/features/wish/provider/wish_provider.dart';
@@ -23,6 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final searchProvider = context.watch<SearchProvider>();
     final wishProvider = context.watch<WishProvider>();
     final AppDimens dimens = context.dimens;
+    final AppColors colors = context.colors;
 
     return Scaffold(
       body: Column(
@@ -70,11 +72,27 @@ class _SearchScreenState extends State<SearchScreen> {
                     isWish: isWish,
                     query: _controller.text,
                     onTap: () {
+                      final message = isWish ? '관심이 해제되었습니다' : '관심이 등록되었습니다';
+
                       if (isWish) {
                         wishProvider.remove(stock.code);
                       } else {
                         wishProvider.add(stock.code);
                       }
+
+                      AppSnackBar.show(
+                        context,
+                        icon: Icon(
+                          isWish ? Icons.star_outline : Icons.star,
+                          color: isWish
+                              ? colors.favoriteInactive
+                              : colors.favoriteActive,
+                          size: dimens.iconSm,
+                        ),
+                        message: message,
+                        colors: colors,
+                        dimens: dimens,
+                      );
                     },
                   );
                 },
