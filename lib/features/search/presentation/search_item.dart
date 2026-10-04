@@ -1,4 +1,5 @@
 import 'package:edencrew_assignment_starter/common/data/model/stock.dart';
+import 'package:edencrew_assignment_starter/features/detail/presentation/detail_screen.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,12 @@ class SearchItem extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => DetailScreen(code: stock.code)),
+          );
+        },
         title: _HighlightText(
           text: stock.name,
           query: query,

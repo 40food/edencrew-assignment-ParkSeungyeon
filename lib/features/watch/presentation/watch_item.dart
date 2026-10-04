@@ -1,4 +1,5 @@
 import 'package:edencrew_assignment_starter/common/widgets/feedback_skeleton.dart';
+import 'package:edencrew_assignment_starter/features/detail/presentation/detail_screen.dart';
 import 'package:edencrew_assignment_starter/features/watch/data/model/watch_stock.dart';
 import 'package:edencrew_assignment_starter/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,14 @@ class WatchItem extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => DetailScreen(code: stock.stock.code),
+            ),
+          );
+        },
         title: Text(
           stock.stock.name,
           style: TextStyle(
