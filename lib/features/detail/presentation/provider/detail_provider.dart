@@ -6,6 +6,23 @@ import 'package:edencrew_assignment_starter/features/detail/data/repository/deta
 
 enum DetailStatus { loading, success, error }
 
+enum DetailPeriod { oneMonth, threeMonths, sixMonths, oneYear }
+
+extension DetailPeriodLabel on DetailPeriod {
+  String get label {
+    switch (this) {
+      case DetailPeriod.oneMonth:
+        return '1개월';
+      case DetailPeriod.threeMonths:
+        return '3개월';
+      case DetailPeriod.sixMonths:
+        return '6개월';
+      case DetailPeriod.oneYear:
+        return '1년';
+    }
+  }
+}
+
 class DetailProvider extends ChangeNotifier {
   final DetailRepository _repository;
   final WishProvider _wishProvider;
@@ -62,5 +79,33 @@ class DetailProvider extends ChangeNotifier {
     );
 
     notifyListeners();
+  }
+
+  DetailPeriod _period = DetailPeriod.oneMonth;
+
+  DetailPeriod get period => _period;
+
+  void setPeriod(DetailPeriod period) {
+    _period = period;
+    notifyListeners();
+  }
+
+  List<DetailPrice> get chartPrices {
+    if (_stock == null) return [];
+
+    switch (_period) {
+      case DetailPeriod.oneMonth:
+        return _stock!.oneMonth;
+      case DetailPeriod.threeMonths:
+        return _stock!.threeMonths;
+      case DetailPeriod.sixMonths:
+        return _stock!.sixMonths;
+      case DetailPeriod.oneYear:
+        return _stock!.oneYear;
+    }
+  }
+
+  List<DetailPrice> get dailyPrices {
+    return chartPrices;
   }
 }

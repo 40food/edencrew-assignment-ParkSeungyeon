@@ -83,7 +83,10 @@ class DetailRepository {
       result.add(
         DetailPrice(
           date: date,
+          openPrice: dto.openPrice.toInt(),
           closePrice: dto.closePrice.toInt(),
+          highPrice: dto.highPrice.toInt(),
+          lowPrice: dto.lowPrice.toInt(),
           changePrice: changePrice,
           changeRate: changeRate,
           volume: dto.accumulatedTradingVolume,

@@ -1,6 +1,10 @@
 import 'package:edencrew_assignment_starter/common/data/api/stock_api.dart';
 import 'package:edencrew_assignment_starter/common/data/provider/wish_provider.dart';
 import 'package:edencrew_assignment_starter/features/detail/data/model/detail_stock.dart';
+import 'package:edencrew_assignment_starter/features/detail/presentation/detail_chart.dart';
+import 'package:edencrew_assignment_starter/features/detail/presentation/detail_daily_table.dart';
+import 'package:edencrew_assignment_starter/features/detail/presentation/detail_period_tab_bar.dart';
+import 'package:edencrew_assignment_starter/features/detail/presentation/detail_summary_card.dart';
 import 'package:edencrew_assignment_starter/features/detail/presentation/provider/detail_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -108,6 +112,7 @@ class _DetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<DetailProvider>();
     final AppDimens dimens = context.dimens;
     final AppColors colors = context.colors;
 
@@ -152,21 +157,27 @@ class _DetailContent extends StatelessWidget {
           ],
         ),
 
-        SizedBox(height: dimens.space6),
+        SizedBox(height: dimens.space4),
 
-        // 그래프
-        Container(
-          height: 220,
-          decoration: BoxDecoration(
-            border: Border.all(color: colors.borderSubtle),
-            borderRadius: BorderRadius.circular(dimens.radiusMd),
-          ),
-          child: const Center(child: Text('등락 그래프')),
+        Column(
+          children: [
+            DetailPeriodTabBar(
+              selectedPeriod: provider.period,
+              onPeriodSelected: provider.setPeriod,
+            ),
+
+            SizedBox(height: context.dimens.space4),
+
+            SizedBox(
+              height: 220,
+              child: DetailChart(prices: provider.chartPrices),
+            ),
+          ],
         ),
 
-        SizedBox(height: dimens.space6),
+        SizedBox(height: dimens.space4),
 
-        _InfoSection(stock: stock, priceFormat: priceFormat),
+        DetailSummaryCard(stock: provider.stock!, priceFormat: priceFormat),
 
         SizedBox(height: dimens.space6),
 
@@ -179,124 +190,10 @@ class _DetailContent extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 12),
+        SizedBox(height: dimens.space1),
 
-        ...stock.dailyPrices.map(
-          (price) => _DailyPriceItem(price: price, priceFormat: priceFormat),
-        ),
+        DetailDailyPriceTable(prices: provider.dailyPrices),
       ],
-    );
-  }
-}
-
-class _InfoSection extends StatelessWidget {
-  const _InfoSection({required this.stock, required this.priceFormat});
-
-  final DetailStock stock;
-  final NumberFormat priceFormat;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _InfoRow(label: '시가', value: priceFormat.format(stock.open)),
-        _InfoRow(label: '고가', value: priceFormat.format(stock.high)),
-        _InfoRow(label: '저가', value: priceFormat.format(stock.low)),
-        _InfoRow(label: '거래량', value: priceFormat.format(stock.volume)),
-        _InfoRow(label: '시가총액', value: priceFormat.format(stock.marketCap)),
-      ],
-    );
-  }
-}
-
-class _InfoRow extends StatelessWidget {
-  const _InfoRow({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.colors;
-    final dimens = context.dimens;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: dimens.space2),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: TextStyle(color: colors.textSecondary, fontSize: 13),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              color: colors.textPrimary,
-              fontSize: 13,
-              fontWeight: AppTypography.medium,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DailyPriceItem extends StatelessWidget {
-  const _DailyPriceItem({required this.price, required this.priceFormat});
-
-  final DetailPrice price;
-  final NumberFormat priceFormat;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppColors colors = context.colors;
-    final AppDimens dimens = context.dimens;
-
-    final isUp = price.changePrice > 0;
-    final isDown = price.changePrice < 0;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: dimens.space3),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              DateFormat('yyyy.MM.dd').format(price.date),
-              style: TextStyle(color: colors.textSecondary, fontSize: 12),
-            ),
-          ),
-          Text(
-            '${priceFormat.format(price.closePrice)}원',
-            style: TextStyle(color: colors.textPrimary, fontSize: 12),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            '${isUp ? '+' : ''}${priceFormat.format(price.changePrice)}',
-            style: TextStyle(
-              color: isUp
-                  ? Colors.red
-                  : isDown
-                  ? Colors.blue
-                  : colors.textSecondary,
-              fontSize: 12,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            '${isUp ? '+' : ''}${price.changeRate.toStringAsFixed(2)}%',
-            style: TextStyle(
-              color: isUp
-                  ? Colors.red
-                  : isDown
-                  ? Colors.blue
-                  : colors.textSecondary,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

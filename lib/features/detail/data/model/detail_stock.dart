@@ -51,14 +51,22 @@ class DetailStock {
 
 class DetailPrice {
   final DateTime date;
+
+  final int openPrice;
   final int closePrice;
+  final int highPrice;
+  final int lowPrice;
+
   final int changePrice;
   final double changeRate;
   final int volume;
 
   const DetailPrice({
     required this.date,
+    required this.openPrice,
     required this.closePrice,
+    required this.highPrice,
+    required this.lowPrice,
     required this.changePrice,
     required this.changeRate,
     required this.volume,
