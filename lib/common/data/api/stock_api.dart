@@ -5,7 +5,7 @@ import 'package:edencrew_assignment_starter/common/data/dto/metadata_dto.dart';
 import 'package:edencrew_assignment_starter/common/data/dto/realtime_dto.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:edencrew_assignment_starter/features/search/data/dto/search_dto.dart';
+import 'package:edencrew_assignment_starter/common/data/dto/search_dto.dart';
 
 class StockApi {
   Future<List<SearchDto>> searchStocks(String query) async {
