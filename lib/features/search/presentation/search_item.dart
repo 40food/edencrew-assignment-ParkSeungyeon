@@ -20,22 +20,24 @@ class SearchItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.colors;
+    final AppDimens dimens = context.dimens;
 
     return Container(
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: colors.borderSubtle,
-            width: context.dimens.borderHairline,
+            width: dimens.borderHairline,
           ),
         ),
       ),
       padding: EdgeInsets.symmetric(
-        vertical: context.dimens.space3,
-        horizontal: context.dimens.space4,
+        vertical: dimens.space3,
+        horizontal: dimens.space4,
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
+        minTileHeight: dimens.rowMinHeight,
         onTap: () {
           Navigator.push(
             context,
@@ -59,7 +61,7 @@ class SearchItem extends StatelessWidget {
         trailing: IconButton(
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-          iconSize: context.dimens.iconMd,
+          iconSize: dimens.iconMd,
           onPressed: onTap,
           icon: Icon(
             isWish ? Icons.star : Icons.star_outline,

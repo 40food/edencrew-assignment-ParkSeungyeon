@@ -23,7 +23,7 @@ class WatchItem extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: colors.borderSubtle,
-            width: context.dimens.borderHairline,
+            width: dimens.borderHairline,
           ),
         ),
       ),
@@ -33,6 +33,7 @@ class WatchItem extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
+        minTileHeight: dimens.rowMinHeight,
         onTap: () {
           Navigator.push(
             context,
